@@ -30,3 +30,43 @@ async function fetchProductsAsync() {
       handleError(error);
     }
   }
+  // Task 4: Display the Products
+function displayProducts(products) {
+    // Select container where products will be displayed
+    const container = document.getElementById("product-container");
+  
+    // Clear container in case there is already content
+    container.innerHTML = "";
+  
+    // Loop through the first 5 products only
+    products.slice(0, 5).forEach(product => {
+      // Destructure necessary fields from product object
+      const { name, price, image } = product.fields;
+  
+      // Create wrapper div for each product
+      const productDiv = document.createElement("div");
+      productDiv.className = "product"; // Add CSS class
+  
+      // Create image element and set its attributes
+      const img = document.createElement("img");
+      img.src = image[0].url;
+      img.alt = name;
+  
+      // Create a heading for product name
+      const productName = document.createElement("h2");
+      productName.textContent = name;
+  
+      // Create a paragraph for product price
+      const productPrice = document.createElement("p");
+      // Divide price by 100 to convert from cents to dollars
+      productPrice.textContent = `$${(price / 100).toFixed(2)}`;
+  
+      // Append image, name, and price to the product div
+      productDiv.appendChild(img);
+      productDiv.appendChild(productName);
+      productDiv.appendChild(productPrice);
+  
+      // Append the product card to the container
+      container.appendChild(productDiv);
+    });
+  }
